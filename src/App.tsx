@@ -4,7 +4,10 @@ function App() {
   return (
     <>
       <TheHeader />
-      <main />
+      <main className="flex mx-auto max-w-5xl min-h-[700px] bg-slate-800 rounded divide-x divide-slate-700 shadow">
+        <div className="w-1/3" />
+        <div className="w-2/3" />
+      </main>
     </>
   );
 }
