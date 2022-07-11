@@ -19,10 +19,9 @@ export const atomNotesSetSelected = atom(null, (get, set, updated: Note) => {
 
 // Actions
 export const atomNotesDeleteSelected = atom(null, (get, set) => {
-  const notes = get(atomNotes);
   set(
     atomNotes,
-    notes.filter((note) => note.id !== get(atomNotesSelected)?.id),
+    get(atomNotes).filter((note) => note.id !== get(atomNotesSelected)?.id),
   );
-  set(atomNotesSelected, notes[0] ?? null);
+  set(atomNotesSelected, get(atomNotes)[0] ?? null);
 });
