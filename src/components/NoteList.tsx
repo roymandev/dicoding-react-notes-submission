@@ -1,6 +1,7 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { twMerge } from 'tailwind-merge';
 import { atomNotes, atomNotesSelected } from '../stores/noteStore';
+import BaseButton from './BaseButton';
 
 interface NoteListProps {
   className?: string;
@@ -17,16 +18,15 @@ function NoteList({ className }: NoteListProps) {
         <ul className="flex flex-col gap-1 p-1 text-slate-400">
           {notes.map((note) => (
             <li key={note.id}>
-              <button
+              <BaseButton
                 className={twMerge(
-                  'py-1 px-2 rounded w-full text-left hover:bg-slate-700',
+                  'py-1 px-2 w-full text-left',
                   selectedNote?.id === note.id && 'bg-slate-700 text-slate-300',
                 )}
                 onClick={() => setSelectedNote(note)}
-                type="button"
               >
-                {note.title}
-              </button>
+                {note.title || 'Untitled'}
+              </BaseButton>
             </li>
           ))}
         </ul>
