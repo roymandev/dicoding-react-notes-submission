@@ -1,6 +1,7 @@
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { RiAddFill } from 'react-icons/ri';
 import { twMerge } from 'tailwind-merge';
-import { atomNotes, atomNotesSelected } from '../stores/noteStore';
+import { atomNotes, atomNotesAdd, atomNotesSelected } from '../stores/noteStore';
 import BaseButton from './BaseButton';
 
 interface NoteListProps {
@@ -10,11 +11,17 @@ interface NoteListProps {
 function NoteList({ className }: NoteListProps) {
   const notes = useAtomValue(atomNotes);
   const [selectedNote, setSelectedNote] = useAtom(atomNotesSelected);
+  const addNote = useSetAtom(atomNotesAdd);
 
   return (
     <aside className={twMerge(className, 'flex flex-col')}>
       <section>
-        <h2 className="py-2 px-3 text-xl font-medium border-b border-slate-700">Notes</h2>
+        <div className="flex items-center border-b border-slate-700">
+          <h2 className="py-2 px-3 text-xl font-medium">Notes</h2>
+          <BaseButton className="p-2 mr-1 ml-auto" onClick={addNote}>
+            <RiAddFill className="w-5 h-5" />
+          </BaseButton>
+        </div>
         <ul className="flex flex-col gap-1 p-1 text-slate-400">
           {notes.map((note) => (
             <li key={note.id}>
