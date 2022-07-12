@@ -30,3 +30,11 @@ export const atomNotesSelectedToggleArchive = atom(null, (get, set) => {
   const selectedNote = get(atomNotesSelected);
   if (selectedNote) set(atomNotesSetSelected, { ...selectedNote, archived: !selectedNote.archived });
 });
+
+export const atomNotesAdd = atom(null, (get, set) => {
+  const createdDate = Date.now();
+  const newNote = { id: createdDate, createdAt: new Date().toISOString(), title: '', body: '', archived: false };
+
+  set(atomNotes, [newNote, ...get(atomNotes)]);
+  set(atomNotesSelected, newNote);
+});
