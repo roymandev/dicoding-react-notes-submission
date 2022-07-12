@@ -25,3 +25,8 @@ export const atomNotesDeleteSelected = atom(null, (get, set) => {
   );
   set(atomNotesSelected, get(atomNotes)[0] ?? null);
 });
+
+export const atomNotesSelectedToggleArchive = atom(null, (get, set) => {
+  const selectedNote = get(atomNotesSelected);
+  if (selectedNote) set(atomNotesSetSelected, { ...selectedNote, archived: !selectedNote.archived });
+});
