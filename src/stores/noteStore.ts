@@ -21,11 +21,14 @@ export const atomNotesSetSelected = atom(null, (get, set, updated: Note) => {
 
 // Actions
 export const atomNotesDeleteSelected = atom(null, (get, set) => {
-  set(
-    atomNotesAll,
-    get(atomNotesAll).filter((note) => note.id !== get(atomNotesSelected)?.id),
-  );
-  set(atomNotesSelected, get(atomNotesAll)[0] ?? null);
+  const selectedNote = get(atomNotesSelected);
+  if (selectedNote) {
+    set(
+      atomNotesAll,
+      get(atomNotesAll).filter((note) => note.id !== selectedNote.id),
+    );
+    set(atomNotesSelected, get(selectedNote.archived ? atomNotesArchived : atomNotesActive)[0] ?? null);
+  }
 });
 
 export const atomNotesSelectedToggleArchive = atom(null, (get, set) => {
