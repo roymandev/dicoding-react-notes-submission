@@ -1,29 +1,31 @@
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 import { getInitialData } from '../utils/data';
 import { Note } from '../utils/types';
 
 // State
-export const atomNotes = atomWithStorage('notes', getInitialData());
+export const atomNotesAll = atom(getInitialData());
+export const atomNotesSelected = atom<Note | null>(null);
 
-export const atomNotesSelected = atomWithStorage<Note | null>('notesSelectedIndex', null);
+// Getter
+export const atomNotesActive = atom((get) => get(atomNotesAll).filter((note) => !note.archived));
+export const atomNotesArchived = atom((get) => get(atomNotesAll).filter((note) => note.archived));
 
 // Setter
 export const atomNotesSetSelected = atom(null, (get, set, updated: Note) => {
   set(atomNotesSelected, updated);
   set(
-    atomNotes,
-    get(atomNotes).map((note) => (note.id === updated.id ? updated : note)),
+    atomNotesAll,
+    get(atomNotesAll).map((note) => (note.id === updated.id ? updated : note)),
   );
 });
 
 // Actions
 export const atomNotesDeleteSelected = atom(null, (get, set) => {
   set(
-    atomNotes,
-    get(atomNotes).filter((note) => note.id !== get(atomNotesSelected)?.id),
+    atomNotesAll,
+    get(atomNotesAll).filter((note) => note.id !== get(atomNotesSelected)?.id),
   );
-  set(atomNotesSelected, get(atomNotes)[0] ?? null);
+  set(atomNotesSelected, get(atomNotesAll)[0] ?? null);
 });
 
 export const atomNotesSelectedToggleArchive = atom(null, (get, set) => {
@@ -35,6 +37,6 @@ export const atomNotesAdd = atom(null, (get, set) => {
   const createdDate = Date.now();
   const newNote = { id: createdDate, createdAt: new Date().toISOString(), title: '', body: '', archived: false };
 
-  set(atomNotes, [newNote, ...get(atomNotes)]);
+  set(atomNotesAll, [newNote, ...get(atomNotesAll)]);
   set(atomNotesSelected, newNote);
 });
