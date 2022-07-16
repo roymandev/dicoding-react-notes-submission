@@ -23,7 +23,7 @@ function NoteListItems({ notes }: NoteListItemsProps) {
               )}
               onClick={() => setSelectedNote(note)}
             >
-              {note.title || 'Untitled'}
+              {note.title || '(Untitled)'}
             </BaseButton>
           </li>
         ))
