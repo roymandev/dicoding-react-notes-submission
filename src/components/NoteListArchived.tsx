@@ -16,7 +16,7 @@ function NoteListArchived({ isOpen, onToggle }: NoteListArchivedProps) {
   return (
     <section
       className={twMerge(
-        'overflow-hidden mt-auto transition-all',
+        'overflow-hidden mt-auto',
         isOpen ? 'h-full' : 'h-[45px]',
       )}
     >
