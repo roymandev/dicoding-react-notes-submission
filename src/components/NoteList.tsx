@@ -23,8 +23,11 @@ function NoteList({ className }: NoteListProps) {
   return (
     <aside className={twMerge(className, 'flex flex-col')}>
       <section className={openArchive ? 'h-0 overflow-hidden' : undefined}>
-        <div className="flex items-center border-b border-slate-700">
-          <h2 className="py-2 px-3 text-xl font-medium">Notes</h2>
+        <div className="flex items-center font-medium border-b border-slate-700">
+          <h2 className="py-2 px-3 text-xl">Notes</h2>
+          <span className="px-3 text-slate-400 bg-slate-900/80 rounded">
+            {notes.length}
+          </span>
           <BaseButton className="p-2 mr-1 ml-auto" onClick={addNote}>
             <RiAddFill className="w-5 h-5" />
           </BaseButton>
@@ -40,11 +43,14 @@ function NoteList({ className }: NoteListProps) {
       >
         <div
           className={twMerge(
-            'flex items-center w-full rounded-none border-slate-700',
+            'flex items-center w-full rounded-none border-slate-700 font-medium',
             openArchive ? 'border-b' : 'border-t',
           )}
         >
-          <h2 className="py-2 px-3 text-xl font-medium">Archived Notes</h2>
+          <h2 className="py-2 px-3 text-xl">Archived Notes</h2>
+          <span className="px-3 text-slate-400 bg-slate-900/80 rounded">
+            {archivedNote.length}
+          </span>
           <BaseButton
             className="p-2 mr-1 ml-auto"
             onClick={() => setOpenArchive(!openArchive)}
