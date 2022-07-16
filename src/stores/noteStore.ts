@@ -5,13 +5,22 @@ import { Note } from '../utils/types';
 // State
 export const atomNotesAll = atom(getInitialData());
 export const atomNotesSelected = atom<Note | null>(null);
+export const atomNotesSearch = atom('');
 
 // Getter
+export const atomNotesFiltered = atom((get) => {
+  const notes = get(atomNotesAll);
+  const search = get(atomNotesSearch).toLocaleLowerCase();
+  if (search.length < 1) return notes;
+  return notes.filter((note) =>
+    note.title.toLocaleLowerCase().includes(search),
+  );
+});
 export const atomNotesActive = atom((get) =>
-  get(atomNotesAll).filter((note) => !note.archived),
+  get(atomNotesFiltered).filter((note) => !note.archived),
 );
 export const atomNotesArchived = atom((get) =>
-  get(atomNotesAll).filter((note) => note.archived),
+  get(atomNotesFiltered).filter((note) => note.archived),
 );
 
 // Setter
