@@ -21,7 +21,7 @@ function NoteList({ className }: NoteListProps) {
   const [openArchive, setOpenArchive] = useState(false);
 
   return (
-    <aside className={twMerge(className, 'flex flex-col')}>
+    <aside className={twMerge(className, 'flex flex-col h-[400px] sm:h-auto')}>
       <section className={openArchive ? 'h-0 overflow-hidden' : undefined}>
         <div className="flex items-center font-medium border-b border-slate-700">
           <h2 className="py-2 px-3 text-xl">Notes</h2>

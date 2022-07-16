@@ -19,7 +19,12 @@ function NoteEditor({ className }: NoteEditorProps) {
   const addNote = useSetAtom(atomNotesAdd);
 
   return (
-    <div className={twMerge(className, 'flex flex-col')}>
+    <div
+      className={twMerge(
+        className,
+        'flex flex-col h-[400px] sm:h-auto border-b sm:border-b-0',
+      )}
+    >
       {selectedNote ? (
         <>
           <NoteEditorHead />
