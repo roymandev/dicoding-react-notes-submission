@@ -1,9 +1,10 @@
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useState } from 'react';
 import { RiAddFill, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import { twMerge } from 'tailwind-merge';
-import { atomNotesActive, atomNotesAdd, atomNotesArchived, atomNotesSelected } from '../stores/noteStore';
+import { atomNotesActive, atomNotesAdd, atomNotesArchived } from '../stores/noteStore';
 import BaseButton from './BaseButton';
+import NoteListItems from './NoteListItems';
 
 interface NoteListProps {
   className?: string;
@@ -12,7 +13,6 @@ interface NoteListProps {
 function NoteList({ className }: NoteListProps) {
   const notes = useAtomValue(atomNotesActive);
   const archivedNote = useAtomValue(atomNotesArchived);
-  const [selectedNote, setSelectedNote] = useAtom(atomNotesSelected);
   const addNote = useSetAtom(atomNotesAdd);
   const [openArchive, setOpenArchive] = useState(false);
 
@@ -25,21 +25,7 @@ function NoteList({ className }: NoteListProps) {
             <RiAddFill className="w-5 h-5" />
           </BaseButton>
         </div>
-        <ul className="flex flex-col gap-1 p-1 text-slate-400">
-          {notes.map((note) => (
-            <li key={note.id}>
-              <BaseButton
-                className={twMerge(
-                  'py-1 px-2 w-full text-left',
-                  selectedNote?.id === note.id && 'bg-slate-700 text-slate-300',
-                )}
-                onClick={() => setSelectedNote(note)}
-              >
-                {note.title || 'Untitled'}
-              </BaseButton>
-            </li>
-          ))}
-        </ul>
+        <NoteListItems notes={notes} />
       </section>
 
       <section className={twMerge('overflow-hidden mt-auto transition-all', openArchive ? 'flex-1' : 'h-[45px]')}>
@@ -54,21 +40,7 @@ function NoteList({ className }: NoteListProps) {
             {openArchive ? <RiArrowDownSLine className="w-5 h-5" /> : <RiArrowUpSLine className="w-5 h-5" />}
           </BaseButton>
         </div>
-        <ul className="flex flex-col gap-1 p-1 text-slate-400">
-          {archivedNote.map((note) => (
-            <li key={note.id}>
-              <BaseButton
-                className={twMerge(
-                  'py-1 px-2 w-full text-left',
-                  selectedNote?.id === note.id && 'bg-slate-700 text-slate-300',
-                )}
-                onClick={() => setSelectedNote(note)}
-              >
-                {note.title || 'Untitled'}
-              </BaseButton>
-            </li>
-          ))}
-        </ul>
+        <NoteListItems notes={archivedNote} />
       </section>
     </aside>
   );
