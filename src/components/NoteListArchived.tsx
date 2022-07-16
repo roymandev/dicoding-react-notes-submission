@@ -23,7 +23,7 @@ function NoteListArchived({ isOpen, onToggle }: NoteListArchivedProps) {
       <div
         className={twMerge(
           'flex items-center w-full rounded-none border-slate-700 font-medium',
-          isOpen ? 'border-b' : 'border-t',
+          isOpen && 'border-b',
         )}
       >
         <h2 className="py-2 px-3 text-xl">Archived Notes</h2>
