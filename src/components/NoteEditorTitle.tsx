@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { atomNotesSelected, atomNotesSetSelected } from '../stores/noteStore';
 import AutoResizeTextarea from './AutoResizeTextarea';
@@ -7,8 +7,10 @@ import AutoResizeTextarea from './AutoResizeTextarea';
 function NoteEditorTitle() {
   const selectedNote = useAtomValue(atomNotesSelected);
   const setSelectedNote = useSetAtom(atomNotesSetSelected);
-  const [titleLength, setTitleLength] = useState(selectedNote?.title.length ?? 0);
+  const [titleLength, setTitleLength] = useState(0);
   const [editTitle, setEditTitle] = useState(false);
+
+  useEffect(() => setTitleLength(selectedNote?.title.length || 0), [selectedNote]);
 
   const onChangeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     const newTitle = e.target.value;
