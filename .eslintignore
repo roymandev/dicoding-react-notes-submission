@@ -1,2 +1,2 @@
-tailwind.config.js
-postcss.config.js
+*.config.js
+*.config.ts
