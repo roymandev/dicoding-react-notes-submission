@@ -9,12 +9,20 @@ const variantClass = {
   primary: 'bg-slate-700 hover:bg-slate-600 shadow',
 };
 
-function BaseButton({ className, variant = 'default', ...rest }: BaseButtonProps) {
+function BaseButton({
+  className,
+  variant = 'default',
+  ...rest
+}: BaseButtonProps) {
   return (
     <button
       type="button"
+      className={twMerge(
+        'rounded text-slate-400 transition-colors outline-none',
+        variantClass[variant],
+        className,
+      )}
       {...rest}
-      className={twMerge('rounded text-slate-400 transition-colors outline-none', variantClass[variant], className)}
     />
   );
 }

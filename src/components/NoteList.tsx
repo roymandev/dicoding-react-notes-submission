@@ -2,7 +2,11 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useState } from 'react';
 import { RiAddFill, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import { twMerge } from 'tailwind-merge';
-import { atomNotesActive, atomNotesAdd, atomNotesArchived } from '../stores/noteStore';
+import {
+  atomNotesActive,
+  atomNotesAdd,
+  atomNotesArchived,
+} from '../stores/noteStore';
 import BaseButton from './BaseButton';
 import NoteListItems from './NoteListItems';
 
@@ -28,7 +32,12 @@ function NoteList({ className }: NoteListProps) {
         <NoteListItems notes={notes} />
       </section>
 
-      <section className={twMerge('overflow-hidden mt-auto transition-all', openArchive ? 'flex-1' : 'h-[45px]')}>
+      <section
+        className={twMerge(
+          'overflow-hidden mt-auto transition-all',
+          openArchive ? 'flex-1' : 'h-[45px]',
+        )}
+      >
         <div
           className={twMerge(
             'flex items-center w-full rounded-none border-slate-700',
@@ -36,8 +45,15 @@ function NoteList({ className }: NoteListProps) {
           )}
         >
           <h2 className="py-2 px-3 text-xl font-medium">Archived Notes</h2>
-          <BaseButton className="p-2 mr-1 ml-auto" onClick={() => setOpenArchive(!openArchive)}>
-            {openArchive ? <RiArrowDownSLine className="w-5 h-5" /> : <RiArrowUpSLine className="w-5 h-5" />}
+          <BaseButton
+            className="p-2 mr-1 ml-auto"
+            onClick={() => setOpenArchive(!openArchive)}
+          >
+            {openArchive ? (
+              <RiArrowDownSLine className="w-5 h-5" />
+            ) : (
+              <RiArrowUpSLine className="w-5 h-5" />
+            )}
           </BaseButton>
         </div>
         <NoteListItems notes={archivedNote} />

@@ -1,6 +1,10 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { twMerge } from 'tailwind-merge';
-import { atomNotesAdd, atomNotesSelected, atomNotesSetSelected } from '../stores/noteStore';
+import {
+  atomNotesAdd,
+  atomNotesSelected,
+  atomNotesSetSelected,
+} from '../stores/noteStore';
 import BaseButton from './BaseButton';
 import NoteEditorHead from './NoteEditorHead';
 import NoteEditorTitle from './NoteEditorTitle';
@@ -26,7 +30,9 @@ function NoteEditor({ className }: NoteEditorProps) {
             className="flex-1 px-4 pb-3 placeholder:text-slate-500 bg-transparent outline-none transition-colors resize-none"
             spellCheck="false"
             value={selectedNote.body || ''}
-            onChange={(e) => setSelectedNote({ ...selectedNote, body: e.target.value })}
+            onChange={(e) =>
+              setSelectedNote({ ...selectedNote, body: e.target.value })
+            }
           />
         </>
       ) : (

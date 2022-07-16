@@ -10,9 +10,14 @@ function NoteEditorTitle() {
   const [titleLength, setTitleLength] = useState(0);
   const [editTitle, setEditTitle] = useState(false);
 
-  useEffect(() => setTitleLength(selectedNote?.title.length || 0), [selectedNote]);
+  useEffect(
+    () => setTitleLength(selectedNote?.title.length || 0),
+    [selectedNote],
+  );
 
-  const onChangeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+  const onChangeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (
+    e,
+  ) => {
     const newTitle = e.target.value;
     if (selectedNote && newTitle.length <= 50) {
       setTitleLength(newTitle.length);
@@ -31,7 +36,13 @@ function NoteEditorTitle() {
         onFocus={() => setEditTitle(true)}
         onBlur={() => setEditTitle(false)}
       />
-      <span className={twMerge('transition-opacity', !editTitle && 'opacity-0', titleLength === 50 && 'text-rose-500')}>
+      <span
+        className={twMerge(
+          'transition-opacity',
+          !editTitle && 'opacity-0',
+          titleLength === 50 && 'text-rose-500',
+        )}
+      >
         {titleLength}/50
       </span>
     </div>

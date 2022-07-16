@@ -1,14 +1,28 @@
 import { twMerge } from 'tailwind-merge';
 
-interface AutoResizeTextareaProps extends React.ComponentPropsWithoutRef<'textarea'> {
+interface AutoResizeTextareaProps
+  extends React.ComponentPropsWithoutRef<'textarea'> {
   parentClass?: string;
 }
 
-function AutoResizeTextarea({ value, className, parentClass, ...rest }: AutoResizeTextareaProps) {
+function AutoResizeTextarea({
+  value,
+  className,
+  parentClass,
+  ...rest
+}: AutoResizeTextareaProps) {
   return (
-    <div className={twMerge(parentClass, 'relative overflow-hidden whitespace-pre-line break-words')}>
+    <div
+      className={twMerge(
+        parentClass,
+        'relative overflow-hidden whitespace-pre-line break-words',
+      )}
+    >
       <textarea
-        className={twMerge(className, 'absolute inset-0 w-full h-full resize-none overflow-hidden')}
+        className={twMerge(
+          className,
+          'absolute inset-0 w-full h-full resize-none overflow-hidden',
+        )}
         value={value}
         spellCheck="false"
         {...rest}
