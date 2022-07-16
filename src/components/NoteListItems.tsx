@@ -12,7 +12,7 @@ function NoteListItems({ notes }: NoteListItemsProps) {
   const [selectedNote, setSelectedNote] = useAtom(atomNotesSelected);
 
   return (
-    <ul className="flex flex-col gap-1 p-1 text-slate-400">
+    <ul className="flex overflow-y-auto flex-col flex-1 gap-1 p-1 text-slate-400">
       {notes.length ? (
         notes.map((note) => (
           <li key={note.id}>

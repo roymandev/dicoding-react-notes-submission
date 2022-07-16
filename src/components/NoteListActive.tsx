@@ -1,5 +1,6 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { RiAddFill } from 'react-icons/ri';
+import { twMerge } from 'tailwind-merge';
 import { atomNotesActive, atomNotesAdd } from '../stores/noteStore';
 import BaseButton from './BaseButton';
 import NoteListItems from './NoteListItems';
@@ -13,7 +14,12 @@ function NoteListActive({ isOpen }: NoteListActiveProps) {
   const addNoteHanlder = useSetAtom(atomNotesAdd);
 
   return (
-    <section className={!isOpen ? 'hidden' : undefined}>
+    <section
+      className={twMerge(
+        'overflow-hidden flex-1 flex flex-col',
+        !isOpen && 'hidden',
+      )}
+    >
       <div className="flex items-center font-medium border-b border-slate-700">
         <h2 className="py-2 px-3 text-xl">Notes</h2>
         <span className="px-3 text-slate-400 bg-slate-900/80 rounded">
