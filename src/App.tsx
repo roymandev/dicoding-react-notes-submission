@@ -1,5 +1,6 @@
 import NoteEditor from './components/NoteEditor';
 import NoteList from './components/NoteList';
+import TheFooter from './components/TheFooter';
 import TheHeader from './components/TheHeader';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <NoteList className="w-1/3" />
         <NoteEditor className="w-2/3" />
       </main>
+      <TheFooter />
     </>
   );
 }
